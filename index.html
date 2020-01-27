@@ -115,7 +115,6 @@ path.invis {
               .attr('fill', '#ccc');
 
         var force = d3.layout.force();
-force.on("tick",tick);
         var nodes = force.nodes(),
             links = force.links();
 function tick() {
@@ -218,7 +217,7 @@ function tick() {
                     return "M" + x1 + "," + y1 + "A" + drx + ", " + dry + " " + xRotation + ", " + largeArc + ", " + sweep + " " + x2 + "," + y2;
                 }
 
-                force.on("tick", function(e) {
+               <!--  force.on("tick", function(e) {
                     var q = d3.geom.quadtree(nodes),
                         i = 0,
                         n = nodes.length,
@@ -237,11 +236,12 @@ function tick() {
                     pathInvis.attr("d", function(d) {
                         return arcPath(d.source.x < d.target.x, d);
                     });
-                });
+                }); -->
 
                 force
                         .charge(-10000)
                         .friction(0.5)
+                        .on("tick",tick)
                         .linkDistance(linkDistance)
                         .size([w, h])
                         .start();
